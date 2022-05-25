@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import { BrowserRouter,Route,Routes} from 'react-router-dom';
-import HomePage from './Pages/HommePage';
-import VolcanoList from './Pages/VolcanoList';
-import NotFoundPage from './Pages/NotFound';
-import Login from './Pages/Login';
-import VolcanoIDpage from './Pages/VolcanoIDpage';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./Pages/HommePage";
+import VolcanoTable from "./Pages/VolcanoTable";
+import NotFoundPage from "./Pages/NotFound";
+import Login from "./Pages/Login";
+import ListVolcanoes from "./Pages/ListVolcanoes";
 
 function App() {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/volcanoes" element={<VolcanoList/>}/>
-          <Route path='/login' element={<Login/>} />
-          <Route path='/volcano/:id' element={<VolcanoIDpage/>} />
-          <Route path='*' element={<NotFoundPage/>} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/volcanoes" element={<VolcanoTable />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/volcano/:id" element={<ListVolcanoes />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </BrowserRouter>
     // <div className="App">
     //     {/* {volcanoData.map((volcanoData) => {
@@ -25,9 +25,8 @@ function App() {
     //         </div>
     //     })} */}
     //     <Button variant="contained" onClick={handlerClick}>Hello World</Button>
-              
+
     // </div>
-    
   );
 }
 
