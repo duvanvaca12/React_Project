@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.volcanoStyle {
+  padding-top: 60px;
+  text-align: center !important;
+  padding-bottom: 40px;
+  
+}
