@@ -6,6 +6,7 @@ import VolcanoTable from "./Pages/VolcanoTable";
 import NotFoundPage from "./Pages/NotFound";
 import Login from "./Pages/Login";
 import ListVolcanoes from "./Pages/ListVolcanoes";
+import BasicTable from "./components/table";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/volcanoes" element={<VolcanoTable />} />
         <Route path="/login" element={<Login />} />
         <Route path="/volcano/:id" element={<ListVolcanoes />} />
+        <Route path="/table" element={<BasicTable />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

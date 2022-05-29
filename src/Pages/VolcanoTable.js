@@ -7,16 +7,19 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import VolcanoTable from "../components/table";
+import { VolcanoSharp } from "@mui/icons-material";
 
 const urlCountries = "http://sefdb02.qut.edu.au:3001/countries";
 const volcanoByName = "http://sefdb02.qut.edu.au:3001/volcanoes";
 
 export default function VolcanoList() {
   // All the states we can find
-  const [volcanoData, setVolcanoData] = useState([0]);
+  const [volcanoData, setVolcanoData] = useState({});
   const [countries, setCountries] = useState([0]);
   const [inputCountry, setInputCountry] = useState("");
-  const [populated, searchPopulated] = useState(countries);
+  const [populated, searchPopulated] = useState(0);
 
   // Fetch the url of countries using GET
   const fetchData = async (url, state) => {
@@ -40,9 +43,11 @@ export default function VolcanoList() {
   useEffect(() => {
     fetchData(urlCountries, setCountries);
   }, []);
+
   useEffect(() => {
     fetchData(queryCountry, setVolcanoData);
   }, [queryCountry]);
+  console.log(volcanoData);
 
   return (
     <Grid container justifyContent="center" spacing={10} p={10}>
@@ -78,7 +83,16 @@ export default function VolcanoList() {
             <MenuItem value={100}>100Km</MenuItem>
           </Select>
         </FormControl>
+        <Button
+          onClick={console.log(volcanoData.id)}
+          variant="contained"
+          sx={{ m: 2 }}
+        >
+          Search
+        </Button>
       </Grid>
+      <Grid></Grid>
+      {/* {VolcanoTable(volcanoData)} */}
     </Grid>
   );
 }

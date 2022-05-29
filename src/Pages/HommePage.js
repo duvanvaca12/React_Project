@@ -14,6 +14,7 @@ import VolcanoIcon from "@mui/icons-material/Volcano";
 import Typography from "@mui/material/Typography";
 import hcbgImage from "/home/cesar/Documents/Proyect_React/volcano-data/src/Resources/background.jpg";
 import "@fontsource/roboto/700.css";
+import Menu from "../components/menu";
 
 export default function HomePage() {
   const [state, setState] = React.useState({
@@ -31,41 +32,6 @@ export default function HomePage() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {["Home", "Volcano Information"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <VolcanoIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Login"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Login /> : <Login />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <div
       class="bg_image"
@@ -82,18 +48,7 @@ export default function HomePage() {
         Search Info About volcanos <br />
         around the world
       </Typography>
-      {["Menu"].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      {Menu()}
     </div>
   );
 }
