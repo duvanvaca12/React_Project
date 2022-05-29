@@ -6,15 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+// import { Link } from "react-router-DOM";
 
-const volcanoes = {
-  name: "Countrys",
-  country: "United States",
-  region: "United States",
-  subregion: "University",
-};
-
-export default function VolcanoTable(volcanos) {
+export default function VolcanoTable(props) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -27,7 +21,7 @@ export default function VolcanoTable(volcanos) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {volcanos.map((volcano) => (
+          {props.volcanos.map((volcano) => (
             <TableRow
               key={volcano.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -14,6 +14,7 @@ export default function HomePage() {
         color: "#f5f5f5",
         textAlign: "center",
         paddingTop: "20em",
+        maxWidth: "100%",
       }}
     >
       <Typography variant="h1" component="div" gutterBottom>
