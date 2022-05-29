@@ -11,28 +11,38 @@ import Typography from "@mui/material/Typography";
 
 export default function Login() {
   return (
-    <div>
-      <Box sx={{ width: "100%" }}>
-        <Stack spacing={2}>
+    <Grid
+      className="login-container"
+      container
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box sx={{ width: "20%" }}>
+        <Stack alignItems="center" spacing={2}>
           <Avatar sx={{ bgcolor: deepOrange[500] }} src="/broken-image.jpg" />
-          <TextField id="LabelEmail" label="Email" variant="outlined" />
-          <TextField id="LabelPassword" label="Password" variant="outlined" />
-          <Button variant="contained">Sign In</Button>
-
-          <Grid container spacing={1}>
-            <Grid item xs={2}>
-              <Typography variant="h6" gutterBottom component="div">
-                Don't have an account?
-              </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Link variant="h6" href="/register">
-                Create an account
-              </Link>
-            </Grid>
-          </Grid>
+          <TextField
+            fullWidth
+            id="LabelEmail"
+            label="Email"
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            id="LabelPassword"
+            label="Password"
+            variant="outlined"
+          />
+          <Button fullWidth variant="contained">
+            Sign In
+          </Button>
+          <Typography variant="h6" gutterBottom component="div">
+            Don't have an account?
+          </Typography>
+          <Link variant="h6" href="/register">
+            Create an account
+          </Link>
         </Stack>
       </Box>
-    </div>
+    </Grid>
   );
 }
