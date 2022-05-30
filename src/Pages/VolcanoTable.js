@@ -10,44 +10,41 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import VolcanoTable from "../components/table";
 import { VolcanoSharp } from "@mui/icons-material";
+import { fetchData } from "../utils";
 
-const urlCountries = "http://sefdb02.qut.edu.au:3001/countries";
 const volcanoByName = "http://sefdb02.qut.edu.au:3001/volcanoes";
 
 export default function VolcanoList() {
   // All the states we can find
-  const [volcanoData, setVolcanoData] = useState({});
-  const [countries, setCountries] = useState([0]);
+  const [volcanoData, setVolcanoData] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [inputCountry, setInputCountry] = useState("");
   const [populated, searchPopulated] = useState(0);
-
-  // Fetch the url of countries using GET
-  const fetchData = async (url, state) => {
-    const response = await fetch(url, { method: "GET" });
-    const data = await response.json(); // Await
-    state(data);
-  };
 
   // ???
   const handleChange = (event) => {
     searchPopulated(event.target.value);
   };
 
-  let queryCountry =
-    populated === 0
-      ? `${volcanoByName}?country=${inputCountry.toLowerCase()}`
-      : `${volcanoByName}?country=${inputCountry.toLowerCase()}&populatedWithin=${populated}km`;
-
   // Asynchronously function
+  const getCountries = async () => {
+    const urlCountries = "http://sefdb02.qut.edu.au:3001/countries";
+    const countriesData = await fetchData(urlCountries);
+    setCountries(countriesData);
+  };
+
+  const searchVolcanoes = async () => {
+    const populatedWithin =
+      populated === 0 ? "" : `&populatedWithin=${populated}km`;
+    const queryCountry = `${volcanoByName}?country=${inputCountry.toLowerCase()}${populatedWithin}`;
+
+    const volcanoesData = await fetchData(queryCountry);
+    setVolcanoData(volcanoesData);
+  };
 
   useEffect(() => {
-    fetchData(urlCountries, setCountries);
+    getCountries();
   }, []);
-
-  useEffect(() => {
-    fetchData(queryCountry, setVolcanoData);
-  }, [queryCountry]);
-  console.log(volcanoData);
 
   return (
     <Grid container justifyContent="center" spacing={10} p={10}>
@@ -83,16 +80,11 @@ export default function VolcanoList() {
             <MenuItem value={100}>100Km</MenuItem>
           </Select>
         </FormControl>
-        <Button
-          onClick={console.log(volcanoData.id)}
-          variant="contained"
-          sx={{ m: 2 }}
-        >
+        <Button onClick={searchVolcanoes} variant="contained" sx={{ m: 2 }}>
           Search
         </Button>
       </Grid>
-      <Grid></Grid>
-      {/* {VolcanoTable(volcanoData)} */}
+      <VolcanoTable volcanos={volcanoData}></VolcanoTable>
     </Grid>
   );
 }

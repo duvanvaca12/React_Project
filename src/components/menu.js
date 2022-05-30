@@ -6,43 +6,46 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import HomeIcon from "@mui/icons-material/Home";
 import VolcanoIcon from "@mui/icons-material/Volcano";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const actions = [
   {
     icon: <HomeIcon />,
     name: "Home",
-    link: <NavLink to="/volcanoes"></NavLink>,
+    link: "/",
   },
   {
     icon: <VolcanoIcon />,
     name: "Volcano information",
-    link: <NavLink to="/volcanoes"></NavLink>,
+    link: "/volcanoes",
   },
   {
     icon: <AccountCircleIcon />,
     name: "Login",
-    link: <NavLink to="/volcanoes"></NavLink>,
+    link: "/login",
   },
 ];
 
 export default function Menu() {
+  const navigate = useNavigate();
+  const handleClick = React.useCallback(
+    (link) => navigate(link, { replace: true }),
+    [navigate]
+  );
   return (
-    <Box sx={{ height: 320, transform: "translateZ(0px)", flexGrow: 1 }}>
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "absolute", bottom: 20, right: 40 }}
-        icon={<MenuIcon />}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={action.link}
-          />
-        ))}
-      </SpeedDial>
-    </Box>
+    <SpeedDial
+      ariaLabel="SpeedDial basic example"
+      sx={{ position: "absolute", bottom: 40, right: 40 }}
+      icon={<MenuIcon />}
+    >
+      {actions.map((action) => (
+        <SpeedDialAction
+          key={action.name}
+          icon={action.icon}
+          tooltipTitle={action.name}
+          onClick={() => handleClick(action.link)}
+        />
+      ))}
+    </SpeedDial>
   );
 }

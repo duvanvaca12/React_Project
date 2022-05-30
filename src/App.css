@@ -36,6 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.login-container {
+  height: 100vh;
+}
 /* .bg_image  */
 
 
